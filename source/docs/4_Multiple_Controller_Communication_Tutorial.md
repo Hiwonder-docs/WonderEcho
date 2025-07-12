@@ -1570,6 +1570,19 @@ import time
 
 ② The register addresses are defined for communication with the module.
 
+{lineno-start=6}
+
+```python
+# I2C address
+I2C_ADDR = 0x34  # I2C address
+ASR_RESULT_ADDR = 100  # ASR result register address
+ASR_SPEAK_ADDR = 110  # ASR speaking register address
+ASR_CMDMAND = 0x00
+ASR_ANNOUNCER = 0xFF
+```
+
+③ The `ASRModule` class is created to establish an I2C connection with the device.
+
 {lineno-start=13}
 
 ```python
@@ -1580,16 +1593,6 @@ class ASRModule:
         self.address = address  # Device's I2C address
         self.send = [0, 0]  # Initialize the data array to be sent
 ```
-
-③ The `ASRModule` class is created to establish an I2C connection with the device.
-
-{lineno-start=}
-
-```python
-paste source code here.
-```
-
-<img src="../_static/media/chapter_4/section_6/image11.png" class="common_img" />
 
 ④ Several functions are defined to handle read and write operations with the integrated voice module.
 
@@ -1818,18 +1821,11 @@ The printed data will be as follows:
 
 ③ When the module recognizes the **"forward"** command, it returns 0x01. If it recognizes the **"backward"** command, it returns 0x02. Similarly, each recognized command returns its corresponding command ID, which is printed via the serial port. For a detailed list of the returned data, please refer to the [Command Word Broadcasting Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip) section.
 
-{lineno-start=}
-
-```python
-paste source code here.
-```
-
 <img src="../_static/media/chapter_4/section_7/image12.png" class="common_img" />
 
 ### 4.7.2 Scratch Voice Broadcast
 
 * **Preparation**
-
 
 (1) Wiring Instructions
 
@@ -1847,7 +1843,7 @@ Before powering on, make sure there are no metal objects in contact with the con
 
 ② Launch the WonderCode software <img src="../_static/media/chapter_4/section_7/image3.png" />
 
-③ Drag the **"02 Voice Announcement Program.sb3"** file (located in the same directory as this document) into the WonderCode interface.
+③ Drag the [02 Voice Announcement Program.sb3](../_static/source_code/Scratch_Communication.zip) file (located in the same directory as this document) into the WonderCode interface.
 
 <img src="../_static/media/chapter_4/section_7/image4.png" class="common_img" />
 
