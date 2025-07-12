@@ -118,7 +118,7 @@ Open the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cws
 
 (6) Locate the corresponding serial port and click on the right side to select it.
 
-<img src="../_static/media/chapter_5/image25.png" class="common_img" style="width:880px;"/>
+<img src="../_static/media/chapter_5/image25.png" class="common_img" style="width:900px;"/>
 
 (7) Next, press the **"RST"** button on the voice interaction module to begin the flashing process. Wait for the flashing to complete successfully.
 
