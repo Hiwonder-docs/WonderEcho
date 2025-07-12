@@ -72,11 +72,11 @@ The WonderEcho website offers users a convenient way to customize the built-in w
 
 <img src="../_static/media/chapter_5/image15.png" class="common_img" />
 
-(2) Copy the [[60000]{cmd_info}.xlsx]() file from the **"CmdWordStructure"** folder to the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\user_file\cmd_info]() folder.
+(2) Copy the **\[60000\]{cmd_info}.xlsx** file from the **"CmdWordStructure"** folder to the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\user_file\cmd_info](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) folder.
 
-(3) Copy the file [[0]asr_english_CI1302_V00916.dat]() from the **"GfstCmd"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr]().
+(3) Copy the file **\[0\]asr_english_CI1302_V00916.dat** from the **"GfstCmd"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing).
 
-(4) Copy the file [[1]asr_english_CI1302_V00916.dat]() from the **"GfstWake"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr]() folder.
+(4) Copy the file **\[1\]asr_english_CI1302_V00916.dat** from the **"GfstWake"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](****) folder.
 
 ### 5.1.4 Integrate Text To Speech
 
@@ -84,11 +84,11 @@ The WonderEcho website offers users a convenient way to customize the built-in w
 
 <img src="../_static/media/chapter_5/image16.png" class="common_img" />
 
-(2) Copy all audio files (`*.wav`) to the folder: [CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\voice\src]()
+(2) Copy all audio files (`*.wav`) to the folder: [CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\voice\src](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing)
 
 ### 5.1.5 Firmware Integration
 
-Open the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\Combine bin.bat]() file and wait for the firmware integration to complete. The window will automatically close once the process is finished.
+Open the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\Combine bin.bat](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) file and wait for the firmware integration to complete. The window will automatically close once the process is finished.
 
 <img src="../_static/media/chapter_5/image17.png" class="common_img" />
 
@@ -98,7 +98,7 @@ Open the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cws
 
 <img src="../_static/media/chapter_5/image18.png" class="common_img" />
 
-(2) Open the **"Upgrade.bat"** file located in the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware]() folder, which can be found in the same directory as this document, and then click on **"Packaging"**.
+(2) Open the **"Upgrade.bat"** file located in the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) folder, which can be found in the same directory as this document, and then click on **"Packaging"**.
 
 <img src="../_static/media/chapter_5/image19.png" class="common_img" />
 
@@ -106,7 +106,7 @@ Open the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cws
 
 <img src="../_static/media/chapter_5/image20.png" class="common_img" />
 
-(4) Once the process is complete, the packaged firmware will be saved in the following path: [5.1.2 Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware]().
+(4) Once the process is complete, the packaged firmware will be saved in the following path: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing).
 
 <img src="../_static/media/chapter_5/image22.png" class="common_img" />
 

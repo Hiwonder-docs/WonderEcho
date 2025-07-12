@@ -26,9 +26,9 @@ This module supports customization of both wake words and command words. For ins
 
 ## 1.4 Port Instruction
 
-<img src="../_static/media/chapter_1/image3.png" class="common_img" />
+<img src="../_static/media/chapter_1/image3.png" class="common_img" style="width:650px;"/>
 
-<img src="../_static/media/chapter_1/image4.png" class="common_img" />
+<img src="../_static/media/chapter_1/image4.png" class="common_img" style="width:650px;"/>
 
 | **No.** | **Hardware name** | **Instruction** |
 | :--: | :--: | :--: |

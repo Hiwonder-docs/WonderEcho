@@ -1,4 +1,4 @@
-# 2.Getting Started
+# 2. Getting Started
 
 :::{Note}
 
@@ -14,7 +14,7 @@ Connect the WonderEcho module to the computer using a Type-C cable.
 
 <img src="../_static/media/chapter_2/image2.png" />
 
-# 2.2 Voice Recognition and Speech Broadcast
+## 2.2 Voice Recognition and Speech Broadcast
 
 To wake up the voice interaction module, say "**Hello Hiwonder**." When the module responds with "**I'm here,**" it indicates that it is in recognition mode. If no command is detected within 15 seconds, the module will announce "I'm going to take a break" and enter sleep mode. In this case, you will need to wake it up again to continue using it.
 
