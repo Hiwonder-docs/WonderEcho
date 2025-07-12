@@ -10,7 +10,7 @@ In this chapter, the voice recognition module is primarily used as a subordinate
 
 ### 4.1.2 Master-Slave Relationship
 
-*   **Voice Recognition Module Function**
+* **Voice Recognition Module Function**
 
 (1) Receiving and Parsing Signals from the Master Device
 
@@ -18,7 +18,7 @@ The module waits for an I2C signal interrupt. When data is received through I2C,
 
 (2) Data processing and feedback: When the module receives a command to read a register, it triggers the corresponding function to send the recognized data back to the master device.
 
-*   **Master Device Functions**
+* **Master Device Functions**
 
 (1) Sending Commands
 
@@ -74,9 +74,9 @@ When the voice interaction module recognizes the **"Move Forward"** command, it 
 The broadcast phrases will not be played automatically. They must be triggered by the main controller through I2C settings. (The broadcast phrases for command entries can also be played.)
 To trigger a broadcast, the main controller writes two bytes to the broadcast register (`0x6E`) via I2C: one byte for the type and one byte for the ID number. The voice interaction module will then broadcast the corresponding phrase. There are two types of broadcasts:
 
-*   **0x00** for command entry phrases (as defined in section 2: Command Entries).
+* **0x00** for command entry phrases (as defined in section 2: Command Entries).
 
-*   **0xFF** for general broadcast phrases.
+* **0xFF** for general broadcast phrases.
 
 <img src="../_static/media/chapter_4/section_2/image4.png" class="common_img" />
 
@@ -467,19 +467,19 @@ Before powering on, ensure that no metal objects come into contact with the cont
 
 ② Open the **Device Manager** to check the serial port number.
 
-<img src="../_static/media/chapter_4/section_4/02/image4.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/02/image4.png" class="common_img" style="width:700px;"/>
 
 ③ Launch the ATX-XISP software, select the corresponding serial port, and set the baud rate to `115200`.
 
-<img src="../_static/media/chapter_4/section_4/02/image5.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/02/image5.png" class="common_img" style="width:700px;"/>
 
 ④ Follow the instructions below to configure the settings.
 
-<img src="../_static/media/chapter_4/section_4/02/image6.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/02/image6.png" class="common_img" style="width:700px;"/>
 
 ⑤ Click **"File"** and select the program file: `STM32F407_ASR_recognition\MDK-ARM\RosRobotControllerM4\RosRobotControllerM4.hex` for downloading.
 
-<img src="../_static/media/chapter_4/section_4/02/image7.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/02/image7.png" class="common_img" style="width:700px;"/>
 
 ⑥ Click **"Start Programming"** to flash the generated hex file onto the STM32 control board.
 
@@ -501,7 +501,7 @@ This program uses the STM32F407 development board to obtain the module's recogni
 
 (5) When the command **"stop"** is recognized, the voice recognition module will broadcast **"copy that,"** and the serial port will print **"stop."**
 
-*   **Brief Program Analysis**
+* **Brief Program Analysis**
 
 (1) Import the necessary libraries for I2C communication with the voice recognition module.
 
@@ -624,7 +624,7 @@ This program enables the voice recognition module to broadcast the prewritten st
 
 The voice recognition module is controlled to sequentially broadcast **"Going straight,"** **"Turning left,"** **"Recyclable waste,"** and **"Hazardous waste"** in a loop, with a 5-second interval for each broadcast.
 
-*   **Brief Program Analysis**
+* **Brief Program Analysis**
 
 (1) Import the necessary libraries for I2C communication with the voice recognition module.
 
@@ -651,9 +651,9 @@ The voice recognition module is controlled to sequentially broadcast **"Going st
 
 (3) In the main function, use the `asr.speak()` function to write data to the voice recognition module. This function requires two parameters:
 
-*   **Parameter 1:** The register address, indicating whether the data is a command word or a broadcast statement.
+* **Parameter 1:** The register address, indicating whether the data is a command word or a broadcast statement.
 
-*   **Parameter 2:** The corresponding value of the broadcast statement.
+* **Parameter 2:** The corresponding value of the broadcast statement.
 
 {lineno-start=155}
 
@@ -742,23 +742,23 @@ Before powering on, ensure that no metal objects come into contact with the cont
 
 ② Open the device manager to check the serial port number.
 
-<img src="../_static/media/chapter_4/section_4/04/image4.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/04/image4.png" class="common_img" style="width:700px;"/>
 
 ③ Open the ATX-XISP software to select the corresponding serial port. Set the baud rate to `115200`.
 
-<img src="../_static/media/chapter_4/section_4/04/image5.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/04/image5.png" class="common_img" style="width:700px;"/>
 
 ④ Follow the instructions below to configure it.
 
-<img src="../_static/media/chapter_4/section_4/04/image6.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/04/image6.png" class="common_img" style="width:700px;"/>
 
 ⑤ Decompress the [STM32F407_ASR_announce.zip](https://drive.google.com/file/d/1uOrxQZC8Hv-tFZmhQNHNLbalJtAU_RpU/view?usp=sharing) file in the same directory as this lesson. Click **"File"** in the software to select the program file `STM32F407_ASR_announcement\MDK-ARM\RosRobotControllerM4\RosRobotControllerM4.hex` for downloading.
 
-<img src="../_static/media/chapter_4/section_4/04/image7.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/04/image7.png" class="common_img" style="width:700px;"/>
 
 (6) Click **"Start programming"** to flash the generated hex file into the STM32 control board.
 
-<img src="../_static/media/chapter_4/section_4/04/image8.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_4/04/image8.png" class="common_img" style="width:700px;"/>
 
 <img src="../_static/media/chapter_4/section_4/04/image9.png" class="common_img" />
 
@@ -768,7 +768,7 @@ This program enables the voice recognition module to broadcast the prewritten st
 
 The voice recognition module is controlled to sequentially broadcast **"Going straight,"** **"Turning left,"** **"Recyclable waste,"** and **"Hazardous waste"** in a loop, with a 5-second interval for each broadcast.
 
-*   **Brief Program Analysis**
+* **Brief Program Analysis**
 
 (1) Import function libraries related to controller communication for the voice recognition module.
 
@@ -834,7 +834,7 @@ The voice recognition module is controlled to sequentially broadcast **"Going st
 
 ### 4.5.1 Remote Connectivity and File Transfer
 
-*   **Preparation**
+* **Preparation**
 
 (1) Hardware Preparation
 
@@ -1193,7 +1193,7 @@ When wiring, the 5V, GND, SDA, and SCL pins of the voice interaction module need
 
 :::{Note}
 
-*   **Before** powering on, make sure no metal objects come into contact with the motherboard, as this could cause a short circuit from the pins on the underside, potentially damaging the board.
+* **Before** powering on, make sure no metal objects come into contact with the motherboard, as this could cause a short circuit from the pins on the underside, potentially damaging the board.
 *   The I2C pin configuration on the Raspberry Pi 4 is identical to that on the **Raspberry** Pi 5, so this wiring method is also compatible with the Raspberry Pi 4.
 
 :::
@@ -1870,10 +1870,10 @@ This example demonstrates how the CoreX controller commands the voice interactio
 
 The CoreX development board controls the voice interaction module to announce the following phrases every 5 seconds:
 
-*   **"Moving forward"**
-*   **"Turning left"**
-*   **"Recyclable materials"**
-*   **"Hazardous waste"**
+* **"Moving forward"**
+* **"Turning left"**
+* **"Recyclable materials"**
+* **"Hazardous waste"**
 
 (2) Program Overview
 
@@ -1885,15 +1885,15 @@ The CoreX development board controls the voice interaction module to announce th
 
 ② The program enters a loop, where it sequentially announces the following phrases:
 
-*   **"Moving forward"** (followed by a 5-second wait),
-*   **"Turning left"** (after another 5-second wait).
+* **"Moving forward"** (followed by a 5-second wait),
+* **"Turning left"** (after another 5-second wait).
 
 <img src="../_static/media/chapter_4/section_7/image10.png" class="common_img" />
 
 ③ The program continues with the following announcements:
 
-*   **"Recyclable materials"** (followed by a 5-second wait),
-*   **"Hazardous waste."**
+* **"Recyclable materials"** (followed by a 5-second wait),
+* **"Hazardous waste."**
 
 <img src="../_static/media/chapter_4/section_7/image11.png" class="common_img" />
 
@@ -1914,7 +1914,7 @@ Expansion Pack address: [https://github.com/Hiwonder/WonderEcho](https://github.
 
 Connect the voice interaction module to the micro:bit expansion board.
 
-<img src="../_static/media/chapter_4/section_8/image2.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_8/image2.png" class="common_img" style="width:800px;"/>
 
 :::{Note}
 Before powering on, ensure that no metal objects come into contact with the controller. Failure to do so may result in a short circuit due to the pins on the underside of the controller, potentially damaging the board.
@@ -1978,7 +1978,7 @@ Before recognition, you must first say **"Hello Hiwonder"** to wake up the modul
 
 Connect the voice interaction module to the micro:bit expansion board.
 
-<img src="../_static/media/chapter_4/section_8/image2.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_8/image2.png" class="common_img" style="width:800px;"/>
 
 :::{Note}
 Before powering on, ensure that no metal objects come into contact with the controller. Failure to do so may result in a short circuit due to the pins on the underside of the controller, potentially damaging the board.

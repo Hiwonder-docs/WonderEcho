@@ -28,9 +28,9 @@ The WonderEcho website offers users a convenient way to customize the built-in w
 
 (6) To add command words, you have two options:
 
-*   **Edit directly on the panel:** Click **"Add Row"** to manually input command words. Ensure all words are in **uppercase** and separate multiple words with hyphens (**-**).
+* **Edit directly on the panel:** Click **"Add Row"** to manually input command words. Ensure all words are in **uppercase** and separate multiple words with hyphens (**-**).
 
-*   **Upload a sample file:** Click **"Attachment Example"** to download a template. Edit the file in Excel according to the format, then upload it. The system will automatically process the data.
+* **Upload a sample file:** Click **"Attachment Example"** to download a template. Edit the file in Excel according to the format, then upload it. The system will automatically process the data.
 
 <img src="../_static/media/chapter_5/image6.png" class="common_img" />
 
@@ -114,11 +114,11 @@ Open the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cws
 
 (5) Click on **"Select firmware"** and locate the firmware generated in step 4, then select it.
 
-<img src="../_static/media/chapter_5/image24.png" class="common_img" />
+<img src="../_static/media/chapter_5/image24.png" class="common_img" style="width:880px;"/>
 
 (6) Locate the corresponding serial port and click on the right side to select it.
 
-<img src="../_static/media/chapter_5/image25.png" class="common_img" />
+<img src="../_static/media/chapter_5/image25.png" class="common_img" style="width:880px;"/>
 
 (7) Next, press the **"RST"** button on the voice interaction module to begin the flashing process. Wait for the flashing to complete successfully.
 
