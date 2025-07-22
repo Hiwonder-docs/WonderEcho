@@ -125,6 +125,10 @@ This program allows the voice recognition module to recognize predefined command
 
 (1) Program Outcome
 
+::: {Note}
+Before issuing commands, you must wake up the module by saying **"hello hiwonder"**.
+:::
+
 ① When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
 
 ② When the command **"go backward"** is recognized, the voice recognition module will broadcast **"going backward,"** and the serial port will print **"back."**
@@ -370,6 +374,10 @@ Prepare an STM32F103 controller, an open-source robot controller, DuPont wires, 
 
 This program enables the voice recognition module to recognize the prewritten commands.
 
+::: {Note}
+Before issuing commands, you must wake up the module by saying **"hello hiwonder"**.
+:::
+
 (1) When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
 
 (2) When the command **"go backward"** is recognized, the voice recognition module will broadcast **"going backward,"** and the serial port will print **"back."**
@@ -490,6 +498,10 @@ Before powering on, ensure that no metal objects come into contact with the cont
 * **Test Case**
 
 This program uses the STM32F407 development board to obtain the module's recognition result, printing the result via the `UART1`.
+
+::: {Note}
+Before issuing commands, you must wake up the module by saying **"hello hiwonder"**.
+:::
 
 (1) When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
 
@@ -1382,7 +1394,9 @@ After completing the preparations, follow these steps to find the IP address of 
 
 (1) Set up a hotspot on your smartphone and make a note of the hotspot name (**Hiwonder**) and password (**123456789**).
 
-<img src="../_static/media/chapter_4/section_6/image27.png" class="common_img" />
+<img src="../_static/media/chapter_4/section_6/image27_1.png" class="common_img" />
+
+<img src="../_static/media/chapter_4/section_6/image27_2.png" class="common_img" />
 
 (2) Connect your computer to the smartphone's hotspot. Once connected, press **"Win"**+**"R"**, type **"CMD"** to open the Command Prompt. In the Command Prompt, enter the command **"arp -a"** to view the IP address of your computer.
 
