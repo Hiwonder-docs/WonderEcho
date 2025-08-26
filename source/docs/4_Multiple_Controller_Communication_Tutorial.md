@@ -47,6 +47,29 @@ Due to the large number of entries, the corresponding types and ID numbers can b
 The master device and the module can have separate power sources, but they must share a common ground to ensure stable communication and voltage levels.
 :::
 
+### 4.1.4 I2C Device Address Modification and Address Register
+
+When using multiple types of modules or sensors, the I2C address of the voice interaction module may conflict with that of other modules (e.g., our voice interaction module and the four-channel motor driver module). In the new version of the voice interaction module, an I2C address modification function has been added. You can determine the version of your module based on the following indicators:
+
+|                       Module Behavior                        | Conclusion  |
+| :----------------------------------------------------------: | :---------: |
+| After powering on or pressing the RST button, the STA indicator flashes quickly 3 times and then slowly once | New version |
+| After powering on or pressing the RST button, the STA indicator slowly flashes once | Old version |
+
+Relevant Registers:
+
+| Register |                           Function                           |
+| :------: | :----------------------------------------------------------: |
+|   0x03   | Register used to set the module's I2C address. The host must send 1 byte of data. (Permissible values: 0x33 / 0x34. Other values are invalid. The default value is 0x34.) |
+
+:::{Note}
+
+* Once a valid value is successfully written to this register, the module will begin switching its internal I2C slave address. At this point, the STA indicator will flash quickly 3 times, indicating a successful address change.
+
+* Switching the internal I2C slave address takes some time. If a command is sent to the voice interaction module using the new I2C address immediately after the change, the module may not respond properly. To ensure normal communication, please wait at least 100ms before attempting to communicate with the module using the new address.
+
+:::
+
 ## 4.2 ID Analysis for Command Word & Broadcast Statement
 
 Open the **[Command Word Broadcasting Protocol List](Appendix.md)** file located in the same directory as this lesson. This file contains the communication protocol for CI1302 and I2C chips.
@@ -126,7 +149,7 @@ This program allows the voice recognition module to recognize predefined command
 (1) Program Outcome
 
 ::: {Note}
-Before issuing commands, you must wake up the module by saying **"hello hiwonder"**.
+To start voice recognition, wake up the module by saying “**Hello Hiwonder**.” It’ll only respond to commands after it’s been activated.
 :::
 
 ① When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
@@ -316,6 +339,8 @@ void loop()
 }
 ```
 
+⑥ For a detailed list of data, please refer to the [Command Word Broadcasting Protocol List]().
+
 ## 4.4 STM32 Communication
 
 ### 4.4.1 STM32F103 Voice Recognition
@@ -374,23 +399,21 @@ Prepare an STM32F103 controller, an open-source robot controller, DuPont wires, 
 
 This program enables the voice recognition module to recognize the prewritten commands.
 
-::: {Note}
-Before issuing commands, you must wake up the module by saying **"hello hiwonder"**.
-:::
+(1) Program Outcome
 
-(1) When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
+① When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
 
-(2) When the command **"go backward"** is recognized, the voice recognition module will broadcast **"going backward,"** and the serial port will print **"back."**
+② When the command **"go backward"** is recognized, the voice recognition module will broadcast **"going backward,"** and the serial port will print **"back."**
 
-(3) When the command **"turn left"** is recognized, the voice recognition module will broadcast **"turning left,"** and the serial port will print **"left."**
+③ When the command **"turn left"** is recognized, the voice recognition module will broadcast **"turning left,"** and the serial port will print **"left."**
 
-(4) When the command **"turn right"** is recognized, the voice recognition module will broadcast **"turning right,"** and the serial port will print **"right."**
+④ When the command **"turn right"** is recognized, the voice recognition module will broadcast **"turning right,"** and the serial port will print **"right."**
 
-(5) When the command **"stop"** is recognized, the voice recognition module will broadcast **"copy that,"** and the serial port will print **"stop."**
+⑤ When the command **"stop"** is recognized, the voice recognition module will broadcast **"copy that,"** and the serial port will print **"stop."**
 
-* **Brief Program Analysis**
+(2) Brief Program Analysis
 
-(1) Import the necessary libraries for I2C communication with the voice recognition module.
+① Import the necessary libraries for I2C communication with the voice recognition module.
 
 {lineno-start=1}
 
@@ -400,7 +423,7 @@ Before issuing commands, you must wake up the module by saying **"hello hiwonder
 #include <string.h>
 ```
 
-(2) Initialize the serial port and I2C communication. Set the baud rate to `9600`.
+② Initialize the serial port and I2C communication. Set the baud rate to `9600`.
 
 {lineno-start=16}
 
@@ -413,7 +436,7 @@ Before issuing commands, you must wake up the module by saying **"hello hiwonder
 	printf("start");
 ```
 
-(3) In the main function, create a `result` variable to store the recognition result. Use the `Asr_Result()` function to obtain the recognition result.
+③ In the main function, create a `result` variable to store the recognition result. Use the `Asr_Result()` function to obtain the recognition result.
 
 {lineno-start=24}
 
@@ -422,7 +445,7 @@ Before issuing commands, you must wake up the module by saying **"hello hiwonder
 		result = Asr_Result(); //Return the recognition result, i.e., the ID of the recognized phrase
 ```
 
-(4) When the command **"go straight"** is recognized, the module will return `0x01`. When **"go backward"** is recognized, it will return `0x02`, and so on for other command words. Each command corresponds to a specific hexadecimal value. For a detailed list of the data, please refer to the **"4.5 Command Word Broadcasting Protocol List"**.
+④ When the command **"go straight"** is recognized, the module will return `0x01`. When **"go backward"** is recognized, it will return `0x02`, and so on for other command words. Each command corresponds to a specific hexadecimal value. For a detailed list of the data, please refer to the [Command Word Broadcasting Protocol List]().
 
 {lineno-start=26}
 
@@ -499,23 +522,21 @@ Before powering on, ensure that no metal objects come into contact with the cont
 
 This program uses the STM32F407 development board to obtain the module's recognition result, printing the result via the `UART1`.
 
-::: {Note}
-Before issuing commands, you must wake up the module by saying **"hello hiwonder"**.
-:::
+(1) Program Outcome
 
-(1) When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
+① When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
 
-(2) When the command **"go backward"** is recognized, the voice recognition module will broadcast **"going backward,"** and the serial port will print **"back."**
+②When the command **"go backward"** is recognized, the voice recognition module will broadcast **"going backward,"** and the serial port will print **"back."**
 
-(3) When the command **"turn left"** is recognized, the voice recognition module will broadcast **"turning left,"** and the serial port will print **"left."**
+③ When the command **"turn left"** is recognized, the voice recognition module will broadcast **"turning left,"** and the serial port will print **"left."**
 
-(4) When the command **"turn right"** is recognized, the voice recognition module will broadcast **"turning right,"** and the serial port will print **"right."**
+④ When the command **"turn right"** is recognized, the voice recognition module will broadcast **"turning right,"** and the serial port will print **"right."**
 
-(5) When the command **"stop"** is recognized, the voice recognition module will broadcast **"copy that,"** and the serial port will print **"stop."**
+⑤ When the command **"stop"** is recognized, the voice recognition module will broadcast **"copy that,"** and the serial port will print **"stop."**
 
-* **Brief Program Analysis**
+(2) Brief Program Analysis
 
-(1) Import the necessary libraries for I2C communication with the voice recognition module.
+① Import the necessary libraries for I2C communication with the voice recognition module.
 
 {lineno-start=12}
 
@@ -524,7 +545,7 @@ Before issuing commands, you must wake up the module by saying **"hello hiwonder
 #include "global.h"
 ```
 
-(2) Define the I2C address of the voice recognition module, as well as the register, command word, and broadcast statement.
+② Define the I2C address of the voice recognition module, as well as the register, command word, and broadcast statement.
 
 {lineno-start=15}
 
@@ -540,7 +561,7 @@ Before issuing commands, you must wake up the module by saying **"hello hiwonder
 #define ASR_ANNOUNCER  0xFF
 ```
 
-(3) In the main function, create a `result` variable to store the recognition result. Use the `HAL_I2C_Mem_Read()` function to obtain the recognition result.
+③ In the main function, create a `result` variable to store the recognition result. Use the `HAL_I2C_Mem_Read()` function to obtain the recognition result.
 
 {lineno-start=35}
 
@@ -549,7 +570,7 @@ Before issuing commands, you must wake up the module by saying **"hello hiwonder
         HAL_I2C_Mem_Read(&hi2c2, ASR_ADDR << 1, ASR_RESULT_ADDR, I2C_MEMADD_SIZE_8BIT, &result, 1, 0xFF);
 ```
 
-(4) When the command word **"go straight"** is recognized, the module will return `0x01`. If **"go backward"** is recognized, it will return `0x02`. This pattern continues for other command words, with each corresponding to a specific hexadecimal value. For a detailed list of these values, please refer to the [Command Word Broadcasting Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip).
+④ When the command word **"go straight"** is recognized, the module will return `0x01`. If **"go backward"** is recognized, it will return `0x02`. This pattern continues for other command words, with each corresponding to a specific hexadecimal value. For a detailed list of these values, please refer to the [Command Word Broadcasting Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip).
 
 {lineno-start=37}
 
@@ -728,7 +749,7 @@ void Asr_Speak(u8 cmd ,u8 idNum)
 }
 ```
 
-(6) For a detailed list of the data values, please refer to the **"4.5 Command Word Broadcasting Protocol List"**.
+(6) For a detailed list of the data values, please refer to the [Command Word Broadcasting Protocol List]().
 
 ### 4.4.4 STM32F407 Voice Broadcast
 
@@ -1084,8 +1105,10 @@ The terminal output should look similar to this:
 {lineno-start=94}
 
 ```python
-if __name__ == "__main__":
-    asr_module = ASRModule(I2C_ADDR)   
+#!/usr/bin/python3
+# coding=utf8
+import smbus
+import time
 ```
 
 ② Object Creation: An object named `asr_module` is instantiated from the `ASRModule` class to represent the voice interaction module. Another variable, `recognition_result`, stores the recognition output. During initialization, the I2C address of the integrated voice interaction module is provided to establish a communication link with the Raspberry Pi bus.
@@ -1093,12 +1116,8 @@ if __name__ == "__main__":
 {lineno-start=26}
 
 ```python
-class ASRModule:
-    def __init__(self,address, bus=1):
-        # Initialize the I2C bus and device address
-        self.bus = smbus.SMBus(bus)  # Use I2C bus 1
-        self.address = address  # I2C address of the device
-        self.send = [0, 0]  # Initialize the list for sending data
+if __name__ == "__main__":
+    asr_module = ASRModule(I2C_ADDR)
 ```
 
 ③ Class Initialization: When the `ASRModule` class is instantiated, it automatically creates a member object `bus` by instantiating the `SMBus` class from the `smbus` library. This enables communication with the Raspberry Pi's I2C bus. The provided I2C slave address is specified for communication during initialization.
@@ -1106,17 +1125,12 @@ class ASRModule:
 {lineno-start=33}
 
 ```python
-    def wire_write_byte(self, val):
-        """
-        Write a single byte to the device
-        :param val: The byte value to be written
-        :return: Returns True if the write is successful, False otherwise
-        """
-        try:
-            self.bus.write_byte(self.address, val) # Send byte to the device
-            return True # Write successful
-        except IOError:
-            return False # Write failed, return False
+    class ASRModule:
+    def __init__(self,address, bus=1):
+        # Initialize the I2C bus and device address
+        self.bus = smbus.SMBus(bus)  # Use I2C bus 1
+        self.address = address  # I2C address of the device
+        self.send = [0, 0]  # Initialize the list for sending data
 ```
 
 ④ Reading Recognition Results: This section focuses on reading recognition result data stored in the module's registers. To achieve this, a function named `wire_read_data_array` is defined within the `ASRModule` class to read data from the slave device via the I2C bus.
@@ -1132,16 +1146,18 @@ If bus communication fails and data cannot be read, an `IOError` exception is ra
 {lineno-start=82}
 
 ```python
-    def speak(self, cmd, id):
+    def wire_read_data_array(self, reg, length):
         """
-        Send a speech command to the device
-        :param cmd: The command byte
-        :param id: speech ID
-        """
-        if cmd == ASR_ANNOUNCER or cmd == ASR_CMDMAND: # Check if the command is valid
-            self.send[0] = cmd # Set the first element of the send list to the command
-            self.send[1] = id # Set the second element of the send list to the ID
-            self.wire_write_data_array(ASR_SPEAK_ADDR, self.send, 2) # Send the command and ID to the specified register
+        Read a list of bytes from a specified register
+        :param reg: The register address
+        :param length: The number of bytes to be read
+        :return: The list of bytes read, or an empty list if reading failed
+        """          
+        try:
+            result = self.bus.read_i2c_block_data(self.address, reg, length) # Read byte list from the device
+            return result # Return the read result
+        except IOError:
+            return [] # Read failed, return an empty list
 ```
 
 ⑤ Retrieving Recognition Results: The `rec_recognition()` function in the `ASRModule` class retrieves the recognized keyword results.
@@ -1153,10 +1169,15 @@ If the list is empty, it indicates a read failure, prompting the function to ret
 {lineno-start=88}
 
 ```python
-        if cmd == ASR_ANNOUNCER or cmd == ASR_CMDMAND: # Check if the command is valid
-            self.send[0] = cmd # Set the first element of the send list to the command
-            self.send[1] = id # Set the second element of the send list to the ID
-            self.wire_write_data_array(ASR_SPEAK_ADDR, self.send, 2) # Send the command and ID to the specified register
+def rec_recognition(self):
+    """
+    Read recognition result
+    :return: The recognition result, returns 0 if reading fails
+    """
+    result = self.wire_read_data_array(ASR_RESULT_ADDR, 1) # Read a byte from the result register
+    if result:
+        return result # Return the read result
+    return 0  # Return 0 if no result is read
 ```
 
 ⑥ Main Function Execution: After instantiating the voice interaction module class in the main function, the `asr_module.rec_recognition()` function is called repeatedly in a loop to continuously obtain data from the voice interaction module.
@@ -1179,8 +1200,7 @@ If the user's speech is not recognized, 0x00 is returned, causing the program to
 {lineno-start=97}
 
 ```python
-        recognition_result = asr_module.rec_recognition()
-        if recognition_result[0] != 0:
+		if recognition_result[0] != 0:
             if recognition_result[0] == 1:
                 print("go")
             elif recognition_result[0] == 2:
@@ -1253,6 +1273,8 @@ Every 5 seconds, the module sequentially announces:
 {lineno-start=3}
 
 ```python
+#!/usr/bin/python3
+# coding=utf8
 import smbus
 import time
 ```
