@@ -14,7 +14,7 @@ This module operates in wake word activation mode, requiring users to say a desi
 
 Once the CI1302 chip recognizes a voice command, it transmits the corresponding instruction to the IIC chip, which then processes and broadcasts the response. The IIC chip stores the received command and transmits it using the IIC slave protocol.
 
-This module supports customization of both wake words and command words. For instructions on modifying them, please refer to [3. Modifying Wake Words and Command Words](3_Modify_Wake_up_and_Command_Words.md).
+This module supports customization of both wake words and command words. For instructions on modifying them, please refer to [3. Modifying Wake Words and Command Words](https://wiki.hiwonder.com/projects/WonderEcho/en/latest/docs/3_Modify_Wake_up_and_Command_Words.html).
 
 ## 1.3 Notice
 

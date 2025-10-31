@@ -76,7 +76,7 @@ The WonderEcho website offers users a convenient way to customize the built-in w
 
 (3) Copy the file **\[0\]asr_english_CI1302_V00916.dat** from the **"GfstCmd"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing).
 
-(4) Copy the file **\[1\]asr_english_CI1302_V00916.dat** from the **"GfstWake"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](****) folder.
+(4) Copy the file **\[1\]asr_english_CI1302_V00916.dat** from the **"GfstWake"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) folder.
 
 ### 5.1.4 Integrate Text To Speech
 

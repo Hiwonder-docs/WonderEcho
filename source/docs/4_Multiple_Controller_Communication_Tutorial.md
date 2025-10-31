@@ -43,9 +43,9 @@ The address of the I2C slave device for the WonderEcho voice interaction module 
 
 Due to the large number of entries, the corresponding types and ID numbers can be found in the protocol documentation.
 
-::: {Note}
+ {Note}
 The master device and the module can have separate power sources, but they must share a common ground to ensure stable communication and voltage levels.
-:::
+
 
 ### 4.1.4 I2C Device Address Modification and Address Register
 
@@ -62,17 +62,15 @@ Relevant Registers:
 | :------: | :----------------------------------------------------------: |
 |   0x03   | Register used to set the module's I2C address. The host must send 1 byte of data. (Permissible values: 0x33 / 0x34. Other values are invalid. The default value is 0x34.) |
 
-:::{Note}
-
-* Once a valid value is successfully written to this register, the module will begin switching its internal I2C slave address. At this point, the STA indicator will flash quickly 3 times, indicating a successful address change.
-
-* Switching the internal I2C slave address takes some time. If a command is sent to the voice interaction module using the new I2C address immediately after the change, the module may not respond properly. To ensure normal communication, please wait at least 100ms before attempting to communicate with the module using the new address.
-
-:::
+> [!NOTE]
+>
+> * Once a valid value is successfully written to this register, the module will begin switching its internal I2C slave address. At this point, the STA indicator will flash quickly 3 times, indicating a successful address change.
+> 
+> * Switching the internal I2C slave address takes some time. If a command is sent to the voice interaction module using the new I2C address immediately after the change, the module may not respond properly. To ensure normal communication, please wait at least 100ms before attempting to communicate with the module using the new address.
 
 ## 4.2 ID Analysis for Command Word & Broadcast Statement
 
-Open the **[Command Word Broadcasting Protocol List](Appendix.md)** file located in the same directory as this lesson. This file contains the communication protocol for CI1302 and I2C chips.
+Open the **[Command Word Broadcasting Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing)** file located in the same directory as this lesson. This file contains the communication protocol for CI1302 and I2C chips.
 
 The protocol begins with `0xAA`, `0x55` and ends with `0xFB`. The two bytes in between represent the function type and the ID number, respectively.
 
@@ -118,13 +116,11 @@ Connect the 5V, GND, SDA, and SCL pins of the voice recognition module to the co
 
 <img src="../_static/media/chapter_4/section_3/01/image2.png" class="common_img" />
 
-::: {Note}
+ {Note}
 Before powering on, ensure that no metal objects come into contact with the controller. This action prevents a short circuit caused by the bottom pins of the controller, which may damage the controller.
-:::
+
 
 (2) Arduino Program Download
-
-[Source Code](../_static/source_code/Arduino_Communication.zip)
 
 ① Connect Arduino controller to the computer with a data cable.
 
@@ -148,9 +144,9 @@ This program allows the voice recognition module to recognize predefined command
 
 (1) Program Outcome
 
-::: {Note}
-To start voice recognition, wake up the module by saying “**Hello Hiwonder**.” It’ll only respond to commands after it’s been activated.
-:::
+ {Note}
+To start voice recognition, wake up the module by saying "**Hello Hiwonder**." It'll only respond to commands after it's been activated.
+
 
 ① When the command **"go straight"** is recognized, the voice recognition module will broadcast **"going straight,"** and the serial port will print **"go."**
 
@@ -201,7 +197,7 @@ void loop()
   result = asr.rec_recognition();  //Return Recognition Result: The recognized entry ID.
 ```
 
-④ When the command **"go straight"** is recognized, the module will return `0x01`. When **"go backward"** is recognized, it will return `0x02`, and so on for other command words. Each command corresponds to a specific hexadecimal value. For a detailed list of the data, please refer to the [Command Word & Broadcast Statement Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip).
+④ When the command **"go straight"** is recognized, the module will return `0x01`. When **"go backward"** is recognized, it will return `0x02`, and so on for other command words. Each command corresponds to a specific hexadecimal value. For a detailed list of the data, please refer to the [Command Word & Broadcast Statement Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing).
 
 {lineno-start=31}
 
@@ -239,13 +235,11 @@ Connect the 5V, GND, SDA, and SCL pins of the voice recognition module to the co
 
 <img src="../_static/media/chapter_4/section_3/02/image2.png" class="common_img" />
 
-::: {Note}
+ {Note}
 Before powering on, ensure that no metal objects come into contact with the controller. This action prevents a short circuit caused by the bottom pins of the controller, which may damage the controller.
-:::
+
 
 (2) Arduino Program Download
-
-[Source Code](../_static/source_code/Arduino_Communication.zip)
 
 ① Connect Arduino controller to the computer with a data cable.
 
@@ -339,7 +333,7 @@ void loop()
 }
 ```
 
-⑥ For a detailed list of data, please refer to the [Command Word Broadcasting Protocol List]().
+⑥ For a detailed list of data, please refer to the [Command Word Broadcasting Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing).
 
 ## 4.4 STM32 Communication
 
@@ -353,13 +347,11 @@ Connect the voice recognition module to the corresponding port on the STM32 boar
 
 <img src="../_static/media/chapter_4/section_4/01/image2.png" class="common_img" />
 
-::: {Note}
+ {Note}
 Before powering on, ensure that no metal objects come into contact with the controller. This action prevents a short circuit caused by the bottom pins of the controller, which may damage the controller.
-:::
+
 
 (2) Program Download
-
-[Source Code](https://drive.google.com/drive/folders/1OCajOWsLT3dxVNVk-MTpxB6k0C6gTbt8?usp=sharing)
 
 Prepare an STM32F103 controller, an open-source robot controller, DuPont wires, and a USB to TTL converter.
 
@@ -445,7 +437,7 @@ This program enables the voice recognition module to recognize the prewritten co
 		result = Asr_Result(); //Return the recognition result, i.e., the ID of the recognized phrase
 ```
 
-④ When the command **"go straight"** is recognized, the module will return `0x01`. When **"go backward"** is recognized, it will return `0x02`, and so on for other command words. Each command corresponds to a specific hexadecimal value. For a detailed list of the data, please refer to the [Command Word Broadcasting Protocol List]().
+④ When the command **"go straight"** is recognized, the module will return `0x01`. When **"go backward"** is recognized, it will return `0x02`, and so on for other command words. Each command corresponds to a specific hexadecimal value. For a detailed list of the data, please refer to the [Command Word Broadcasting Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing).
 
 {lineno-start=26}
 
@@ -484,13 +476,11 @@ Connect the voice recognition module to the corresponding port on the STM32F407 
 
 <img src="../_static/media/chapter_4/section_4/02/image2.png" class="common_img" />
 
-::: {Note}
+ {Note}
 Before powering on, ensure that no metal objects come into contact with the controller. This action prevents a short circuit caused by the bottom pins of the controller, which may damage the controller.
-:::
+
 
 (2) Program Download
-
-[Source Code](https://drive.google.com/file/d/1r3G6OZyehRaJ02ISqkuUrrFc0ucCiXe9/view?usp=sharing)
 
 ① Connect the `UART1` port on the STM32 controller to the PC using a Type-C cable.
 
@@ -570,7 +560,7 @@ This program uses the STM32F407 development board to obtain the module's recogni
         HAL_I2C_Mem_Read(&hi2c2, ASR_ADDR << 1, ASR_RESULT_ADDR, I2C_MEMADD_SIZE_8BIT, &result, 1, 0xFF);
 ```
 
-④ When the command word **"go straight"** is recognized, the module will return `0x01`. If **"go backward"** is recognized, it will return `0x02`. This pattern continues for other command words, with each corresponding to a specific hexadecimal value. For a detailed list of these values, please refer to the [Command Word Broadcasting Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip).
+④ When the command word **"go straight"** is recognized, the module will return `0x01`. If **"go backward"** is recognized, it will return `0x02`. This pattern continues for other command words, with each corresponding to a specific hexadecimal value. For a detailed list of these values, please refer to the [Command Word Broadcasting Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing).
 
 {lineno-start=37}
 
@@ -609,13 +599,11 @@ Connect the voice recognition module to the corresponding port on the STM32 boar
 
 <img src="../_static/media/chapter_4/section_4/03/image2.png" class="common_img" />
 
-::: {Note}
+ {Note}
 Before powering on, ensure that no metal objects come into contact with the controller. This action prevents a short circuit caused by the bottom pins of the controller, which may damage the controller.
-:::
+
 
 (2) Program Download
-
-[Source Code](https://drive.google.com/drive/folders/1aFn3V6CAVDdIoA0LYsWhxdwEABsr4rLS?usp=sharing)
 
 Prepare an STM32F103 development board, an open-source robot controller, DuPont wires, and a USB to TTL converter.
 
@@ -749,7 +737,7 @@ void Asr_Speak(u8 cmd ,u8 idNum)
 }
 ```
 
-(6) For a detailed list of the data values, please refer to the [Command Word Broadcasting Protocol List]().
+(6) For a detailed list of the data values, please refer to the [Command Word Broadcasting Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing).
 
 ### 4.4.4 STM32F407 Voice Broadcast
 
@@ -761,13 +749,11 @@ Connect the voice recognition module to the corresponding port on the STM32F407 
 
 <img src="../_static/media/chapter_4/section_4/04/image2.png" class="common_img" />
 
-::: {Note}
+ {Note}
 Before powering on, ensure that no metal objects come into contact with the controller. This action prevents a short circuit caused by the bottom pins of the controller, which may damage the controller.
-:::
+
 
 (2) Program Download
-
-[Source Code](https://drive.google.com/file/d/1uOrxQZC8Hv-tFZmhQNHNLbalJtAU_RpU/view?usp=sharing)
 
 ① Connect the `UART1` port on the STM32 controller to the PC with a Type-C cable.
 
@@ -859,7 +845,7 @@ The voice recognition module is controlled to sequentially broadcast **"Going st
 }
 ```
 
-(5) For the detailed data list, please refer to the [Command Word&Broadcast Statement Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip).
+(5) For the detailed data list, please refer to the [Command Word&Broadcast Statement Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing).
 
 <p id="anchor_4_5"></p>
 
@@ -877,7 +863,7 @@ Prepare a laptop for the setup. If you're using a desktop computer, make sure to
 
 MobaXterm is a software that integrates various remote computing tools and provides a graphical interface. By connecting to the Raspberry Pi's Wi-Fi hotspot, you can control the Raspberry Pi directly from your computer. Follow the steps below to install the software:
 
-① Extract the [MobaXterm_Installer_v22.1.zip](Appendix.md) file.
+① Extract the [MobaXterm_Installer_v22.1.zip](https://wiki.hiwonder.com/projects/WonderEcho/en/latest/docs/Appendix.html) file.
 
 <img src="../_static/media/chapter_4/section_5/image33.png" class="common_img" />
 
@@ -986,7 +972,7 @@ VNC is a remote desktop software that enables you to control your system remotel
 
 (1) Installing VNC
 
-① Double-click the [VNC-Viewer-6.17.731-Windows](Appendix.md) file . In the pop-up dialog, select **"English"** as the installation language and click **"OK."**
+① Double-click the [VNC-Viewer-6.17.731-Windows](https://wiki.hiwonder.com/projects/WonderEcho/en/latest/docs/Appendix.html) file . In the pop-up dialog, select **"English"** as the installation language and click **"OK."**
 
 <img src="../_static/media/chapter_4/section_5/image22.png" class="common_img" />
 
@@ -1040,20 +1026,18 @@ When wiring, the 5V, GND, SDA, and SCL pins of the voice interaction module need
 
 <img src="../_static/media/chapter_4/section_5/image2.png" class="common_img" />
 
-:::{Note}
-
-*   Before powering on, make sure no metal objects come into contact with the motherboard, as this could cause a short circuit from the pins on the underside, potentially damaging the board.
-*   The I2C pin configuration on the Raspberry Pi 4 is identical to that on the **Raspberry** Pi 5, so this wiring method is also compatible with the Raspberry Pi 4.
-
-:::
+> [!NOTE]
+> 
+> * Before powering on, make sure no metal objects come into contact with the motherboard, as this could cause a short circuit from the pins on the underside, potentially damaging the board.
+> * The I2C pin configuration on the Raspberry Pi 4 is identical to that on the **Raspberry** Pi 5, so this wiring method is also compatible with the Raspberry Pi 4.
 
 (2) Importing and Running the Program
 
-:::{Note}
-For instructions on installing and using MobaXterm and VNC Viewer, refer to [4.5.1 Remote Connectivity and File Transfer](#anchor_4_5).
-:::
+> [!NOTE]
+>
+> For instructions on installing and using MobaXterm and VNC Viewer, refer to [4.5.1 Remote Connectivity and File Transfer](#anchor_4_5).
 
-① Use MobaXterm to transfer the [speech_recognition.py](../_static/source_code/speech_recognition.zip) file  (located in the same directory as this document) to the Raspberry Pi. In this example, we drag the file to the desktop. Then, connect to the Raspberry Pi using VNC Viewer.
+① Use MobaXterm to transfer the `speech_recognition.py` file  (located in the same directory as this document) to the Raspberry Pi. In this example, we drag the file to the desktop. Then, connect to the Raspberry Pi using VNC Viewer.
 
 <img src="../_static/media/chapter_4/section_5/image3.png" class="common_img" />
 
@@ -1078,9 +1062,9 @@ This example demonstrates how the Raspberry Pi retrieves recognition results fro
 
 (1) Expected Behavior
 
-:::{Note}
-Before issuing commands, you must wake up the module by saying **"Hello Hiwonder"**
-:::
+> [!NOTE]
+>
+> Before issuing commands, you must wake up the module by saying **"Hello Hiwonder"**
 
 ① When the voice interaction module detects **"Move forward"**, it responds with **"Moving forward"**, and the terminal outputs: go
 
@@ -1097,8 +1081,6 @@ The terminal output should look similar to this:
 <img src="../_static/media/chapter_4/section_5/image46.png" class="common_img" />
 
 (2) Brief Program Analysis
-
-[Source Code](../_static/source_code/speech_recognition.zip)
 
 ① Library Imports: The program imports the `smbus` library for I2C bus communication and the `time` library for time processing. These libraries facilitate communication with the voice interaction module.
 
@@ -1223,16 +1205,14 @@ When wiring, the 5V, GND, SDA, and SCL pins of the voice interaction module need
 
 <img src="../_static/media/chapter_4/section_5/image2.png" class="common_img" />
 
-:::{Note}
-
-* **Before** powering on, make sure no metal objects come into contact with the motherboard, as this could cause a short circuit from the pins on the underside, potentially damaging the board.
-*   The I2C pin configuration on the Raspberry Pi 4 is identical to that on the **Raspberry** Pi 5, so this wiring method is also compatible with the Raspberry Pi 4.
-
-:::
+> [!NOTE]
+>
+> * **Before** powering on, make sure no metal objects come into contact with the motherboard, as this could cause a short circuit from the pins on the underside, potentially damaging the board.
+> * The I2C pin configuration on the Raspberry Pi 4 is identical to that on the **Raspberry** Pi 5, so this wiring method is also compatible with the Raspberry Pi 4.
 
 (2) Importing and Running the Program
 
-① Use MobaXterm to transfer the [asr_control.py](../_static/source_code/asr_control.zip) file  (located in the same directory as this document) to the Raspberry Pi. In this example, we drag the file to the desktop. Then, connect to the Raspberry Pi using VNC Viewer.
+① Use MobaXterm to transfer the `asr_control.py` file  (located in the same directory as this document) to the Raspberry Pi. In this example, we drag the file to the desktop. Then, connect to the Raspberry Pi using VNC Viewer.
 
 <img src="../_static/media/chapter_4/section_5/image3.png" class="common_img" />
 
@@ -1265,8 +1245,6 @@ Every 5 seconds, the module sequentially announces:
 *   Hazardous waste
 
 (2) Brief Program Analysis
-
-[Source Code](../_static/source_code/asr_control.zip)
 
 ① Library Imports: The program imports the `smbus` library for I2C bus communication and the `time` library for time processing. These libraries facilitate communication with the voice interaction module.
 
@@ -1385,9 +1363,9 @@ class ASRModule:
 
 This section is intended for scenarios where the Jetson Nano does not have a dedicated display, and remote login is performed using Nomachine.
 
-:::{Note}
-A display must be connected during the initial setup. After the setup is complete, a display is no longer necessary unless the Wi-Fi network is changed.
-:::
+> [!NOTE]
+>
+> A display must be connected during the initial setup. After the setup is complete, a display is no longer necessary unless the Wi-Fi network is changed.
 
 * **Introduction to Nomachine**
 
@@ -1472,7 +1450,7 @@ On the page, find the **"NoMachine for ARM"** section and click to navigate to t
 sudo dpkg -i nomachine_8.1.2_1_arm64.deb
 ```
 
-(Note: Replace [nomachine_8.1.2_1_arm64.deb](Appendix.md) with the actual name of the downloaded file.) Press Enter and wait for the installation to complete.
+(Note: Replace [nomachine_8.1.2_1_arm64.deb](https://wiki.hiwonder.com/projects/WonderEcho/en/latest/docs/Appendix.html) with the actual name of the downloaded file.) Press Enter and wait for the installation to complete.
 
 <img src="../_static/media/chapter_4/section_6/image15.png" class="common_img" />
 
@@ -1535,9 +1513,9 @@ This example uses the Jetson Nano board. Connect the integrated voice module to 
 
 <img src="../_static/media/chapter_4/section_6/image2.png" class="common_img" />
 
-:::{Note}
-Before powering on, ensure no metal objects are in contact with the board. Metal contact with the pins on the underside of the board may cause a short circuit and potentially damage the board.
-:::
+> [!NOTE]
+>
+> Before powering on, ensure no metal objects are in contact with the board. Metal contact with the pins on the underside of the board may cause a short circuit and potentially damage the board.
 
 (2) Program Import and Execution
 
@@ -1545,7 +1523,7 @@ Before powering on, ensure no metal objects are in contact with the board. Metal
 
 <img src="../_static/media/chapter_4/section_6/image3.png" class="common_img" />
 
-② Drag the [speech_recognition.py](../_static/source_code/speech_recognition_Jetson.zip) file to the Jetson desktop (or any preferred location). Once you see **"Complete,"** the transfer is successful.
+② Drag the `speech_recognition.py` file to the Jetson desktop (or any preferred location). Once you see **"Complete,"** the transfer is successful.
 
 <img src="../_static/media/chapter_4/section_6/image4.png" class="common_img" />
 
@@ -1573,9 +1551,9 @@ This example demonstrates how the voice module recognizes specific keywords and 
 
 (1) Expected Results
 
-:::{Note}
-Before the module can recognize commands, you must first say **"Hello Hiwonder"** to wake it up. After this, it will be ready to listen for further instructions.
-:::
+> [!NOTE]
+>
+> Before the module can recognize commands, you must first say **"Hello Hiwonder"** to wake it up. After this, it will be ready to listen for further instructions.
 
 ① When the voice interaction module detects the keyword **"forward"**, it will respond with **"Moving forward,"** and the terminal will display **"go."**
 
@@ -1592,8 +1570,6 @@ The output in the terminal will look like this:
 <img src="../_static/media/chapter_4/section_6/image37.png" class="common_img" />
 
 (2) Program Overview
-
-[Source Code](../_static/source_code/speech_recognition_Jetson.zip)
 
 ① The program imports the `smbus` and `time` libraries to facilitate I2C communication with the voice interaction module and to manage delays.
 
@@ -1665,9 +1641,9 @@ This example uses the Jetson Nano board. Connect the integrated voice module to 
 
 <img src="../_static/media/chapter_4/section_6/image2.png" class="common_img" />
 
-:::{Note}
-**Important:** Before powering on, ensure that no metallic objects are in contact with the board. The pins on the underside of the board could cause a short circuit, potentially damaging the board.
-:::
+> [!NOTE]
+>
+> **Important:** Before powering on, ensure that no metallic objects are in contact with the board. The pins on the underside of the board could cause a short circuit, potentially damaging the board.
 
 (2) Program Import and Execution
 
@@ -1675,7 +1651,7 @@ This example uses the Jetson Nano board. Connect the integrated voice module to 
 
 <img src="../_static/media/chapter_4/section_6/image3.png" class="common_img" />
 
-② Drag the [asr_control.py](../_static/source_code/asr_control_jetson.zip) file to the Jetson desktop (or any preferred location). Once the message **"complete"** appears, the transfer is successful.
+② Drag the `asr_conUtrol.py` file to the Jetson desktop (or any preferred location). Once the message **"complete"** appears, the transfer is successful.
 
 <img src="../_static/media/chapter_4/section_6/image4.png" class="common_img" />
 
@@ -1712,8 +1688,6 @@ The Jetson development board controls the voice interaction module to play the f
 *   Hazardous waste
 
 (2) Program Overview
-
-[Source Code](../_static/source_code/asr_control_jetson.zip)
 
 ① The program imports the `smbus` and `time` libraries to handle I2C communication and manage delays with the voice interaction module.
 
@@ -1779,7 +1753,7 @@ if __name__ == "__main__":
 
 ⑦ `ASR_ANNOUNCER`, with a value of 0xFF, indicates that the operation is an announcement phrase. Writing 1 to the `ASR_ANNOUNCER` register triggers the message **"Recyclable materials,"** while 3 corresponds to **"Hazardous waste."**
 
-⑧ For the full list of data values, please refer to the [Command Word Broadcasting Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip).
+⑧ For the full list of data values, please refer to the [Command Word Broadcasting Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing).
 
 ## 4.7 Scratch Communication
 
@@ -1794,9 +1768,9 @@ Use a 4-pin cable to connect the voice interaction module to interface 3 on the 
 
 <img src="../_static/media/chapter_4/section_7/image2.png" class="common_img" />
 
-:::{Note}
-Before powering on, make sure there are no metal objects in contact with the controller. Otherwise, the pins at the bottom of the board may cause a short circuit, potentially damaging the board.
-:::
+> [!NOTE]
+>
+> Before powering on, make sure there are no metal objects in contact with the controller. Otherwise, the pins at the bottom of the board may cause a short circuit, potentially damaging the board.
 
 (2) Scratch Program Download
 
@@ -1825,9 +1799,9 @@ This example demonstrates how the CoreX controller retrieves the recognition res
 
 (1) Implementation Effect
 
-:::{Note}
-This example demonstrates how the CoreX controller retrieves the recognition results from the voice interaction module and prints them via the serial port.
-:::
+> [!NOTE]
+>
+> This example demonstrates how the CoreX controller retrieves the recognition results from the voice interaction module and prints them via the serial port.
 
 ① When the voice interaction module recognizes the **"forward"** command, it will respond with **"Moving forward,"** and the serial port will print **"go."**
 
@@ -1845,8 +1819,6 @@ The printed data will be as follows:
 
 (2) Program Overview
 
-[Source Code](../_static/source_code/Scratch_Communication.zip)
-
 ① Upon program startup, the interface for the WonderEcho module is initialized to Interface 3.
 
 <img src="../_static/media/chapter_4/section_7/image14.png" class="common_img" />
@@ -1855,7 +1827,7 @@ The printed data will be as follows:
 
 <img src="../_static/media/chapter_4/section_7/image15.png" class="common_img" />
 
-③ When the module recognizes the **"forward"** command, it returns 0x01. If it recognizes the **"backward"** command, it returns 0x02. Similarly, each recognized command returns its corresponding command ID, which is printed via the serial port. For a detailed list of the returned data, please refer to the [Command Word Broadcasting Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip) section.
+③ When the module recognizes the **"forward"** command, it returns 0x01. If it recognizes the **"backward"** command, it returns 0x02. Similarly, each recognized command returns its corresponding command ID, which is printed via the serial port. For a detailed list of the returned data, please refer to the [Command Word Broadcasting Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing) section.
 
 <img src="../_static/media/chapter_4/section_7/image12.png" class="common_img" />
 
@@ -1869,9 +1841,9 @@ Use a 4-pin cable to connect the voice interaction module to interface 3 on the 
 
 <img src="../_static/media/chapter_4/section_7/image2.png" class="common_img" />
 
-:::{Note}
-Before powering on, make sure there are no metal objects in contact with the controller. Otherwise, the pins at the bottom of the board may cause a short circuit, potentially damaging the board.
-:::
+> [!NOTE]
+>
+> Before powering on, make sure there are no metal objects in contact with the controller. Otherwise, the pins at the bottom of the board may cause a short circuit, potentially damaging the board.
 
 (2) Scratch Program Download
 
@@ -1879,7 +1851,7 @@ Before powering on, make sure there are no metal objects in contact with the con
 
 ② Launch the WonderCode software <img src="../_static/media/chapter_4/section_7/image3.png" />
 
-③ Drag the [02 Voice Announcement Program.sb3](../_static/source_code/Scratch_Communication.zip) file (located in the same directory as this document) into the WonderCode interface.
+③ Drag the `02 Voice Announcement Program.sb3` file (located in the same directory as this document) into the WonderCode interface.
 
 <img src="../_static/media/chapter_4/section_7/image4.png" class="common_img" />
 
@@ -1895,7 +1867,6 @@ Before powering on, make sure there are no metal objects in contact with the con
 
 * **Test Case**
 
-
 This example demonstrates how the CoreX controller commands the voice interaction module to loop through speech playback.
 
 (1) Expected Outcome
@@ -1908,8 +1879,6 @@ The CoreX development board controls the voice interaction module to announce th
 * **"Hazardous waste"**
 
 (2) Program Overview
-
-[Source Code](../_static/source_code/Scratch_Communication.zip)
 
 ① Upon program initialization, the WonderEcho module interface is set to Interface 3.
 
@@ -1929,18 +1898,17 @@ The CoreX development board controls the voice interaction module to announce th
 
 <img src="../_static/media/chapter_4/section_7/image11.png" class="common_img" />
 
-For a detailed list of the data, please refer to the [Command Word Broadcasting Protocol List](../_static/source_code/Command_Word_Broadcast_Statement_Protocol_List.zip) section.
+For a detailed list of the data, please refer to the [Command Word Broadcasting Protocol List](https://drive.google.com/drive/folders/1xo5YZnQU_wgp0oPT7s2kWCnCrKcfP8ba?usp=sharing) section.
 
 ## 4.8 microbit Communication
 
 ### 4.8.1 microbit Voice Recognition
 
-:::{Note}
-Expansion Pack address: [https://github.com/Hiwonder/WonderEcho](https://github.com/Hiwonder/WonderEcho)
-:::
+> [!NOTE]
+>
+> Expansion Pack address: [https://github.com/Hiwonder/WonderEcho](https://github.com/Hiwonder/WonderEcho)
 
 * **Preparation**
-
 
 (1) Wiring Instruction
 
@@ -1948,9 +1916,9 @@ Connect the voice interaction module to the micro:bit expansion board.
 
 <img src="../_static/media/chapter_4/section_8/image2.png" class="common_img" style="width:800px;"/>
 
-:::{Note}
-Before powering on, ensure that no metal objects come into contact with the controller. Failure to do so may result in a short circuit due to the pins on the underside of the controller, potentially damaging the board.
-:::
+> [!NOTE]
+>
+> Before powering on, ensure that no metal objects come into contact with the controller. Failure to do so may result in a short circuit due to the pins on the underside of the controller, potentially damaging the board.
 
 (2) micro:bit Program Download
 
@@ -1970,12 +1938,11 @@ Before powering on, ensure that no metal objects come into contact with the cont
 
 * **Test Case**
 
-
 (1) Achieved Effect
 
-:::{Note}
-Before recognition, you must first say **"Hello Hiwonder"** to wake up the module, enabling it to perform recognition.
-:::
+> [!NOTE]
+>
+> Before recognition, you must first say **"Hello Hiwonder"** to wake up the module, enabling it to perform recognition.
 
 ① When the voice interaction module recognizes the word **"Go forward,"** it will respond with **"Going forward,"** and the serial port will output **"go."**
 
@@ -1988,8 +1955,6 @@ Before recognition, you must first say **"Hello Hiwonder"** to wake up the modul
 ⑤ When the voice interaction module recognizes the word **"stop"** or **"halt,"** it will respond with **"Received,"** and the serial port will output **"stop."**
 
 (2) Brief Program Analysis
-
-[Source Code](../_static/source_code/microbit_Communication.zip)
 
 ① Initialization: Redirect the serial port to USB for communication between the device and the computer via USB.
 
@@ -2012,9 +1977,9 @@ Connect the voice interaction module to the micro:bit expansion board.
 
 <img src="../_static/media/chapter_4/section_8/image2.png" class="common_img" style="width:800px;"/>
 
-:::{Note}
-Before powering on, ensure that no metal objects come into contact with the controller. Failure to do so may result in a short circuit due to the pins on the underside of the controller, potentially damaging the board.
-:::
+> [!NOTE]
+>
+> Before powering on, ensure that no metal objects come into contact with the controller. Failure to do so may result in a short circuit due to the pins on the underside of the controller, potentially damaging the board.
 
 (2) micro:bit Program Download
 
@@ -2034,7 +1999,6 @@ Before powering on, ensure that no metal objects come into contact with the cont
 
 * **Test Case**
 
-
 This example program uses the micro:bit development board to make the voice interaction module play speech in a continuous loop.
 
 (1) Achieved Effect
@@ -2042,8 +2006,6 @@ This example program uses the micro:bit development board to make the voice inte
 The voice interaction module announces **"Going forward,"** **"Turning left,"** **"Recyclable waste,"** and **"Hazardous waste"** in sequence every 5 seconds.
 
 (2) Brief Program Analysis
-
-[Source Code](../_static/source_code/microbit_Communication.zip)
 
 ① Within the loop function, pre-recorded phrases are set to play in sequence.
 
