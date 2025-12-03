@@ -1,9 +1,5 @@
 # 2. Getting Started
 
-:::{Note}
-Hardware I/O ports refer to the physical hardware pin numbers on the chip.
-:::
-
 > [!NOTE]
 >
 > * The voice recognition firmware is pre-installed before delivery, allowing for a quick and easy experience with its functionality.
