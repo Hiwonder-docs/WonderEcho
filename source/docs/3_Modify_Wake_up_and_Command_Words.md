@@ -25,11 +25,7 @@ Connect the module to the computer with a Type-C cable.
 
 (3) Say the desired wake-up word to the module. It is recommended to choose a short word. For example, set **"Hiwonder"** as the wake-up word.
 
-(4) Once the module successfully recognizes the word, it will announce **"learning succeed"**, confirming that the wake-up word has been successfully modified. You can now use **"Hiwonder"** to activate the module.
-
-(5) To delete the "**Hiwonder**" command, simply say "**DELETE-WAKE**." When the module responds with "**Speech length is not enough,** 
-
-**please say it again**," the command will be removed. Note that this only deletes the "**Hiwonder**" command.
+(4) Once the module successfully recognizes the word, it will respond and confirm that the wake-up word has been successfully modified. The custom wake word **Hiwonder** can be used to activate the module now.
 
 > [!NOTE]
 >
@@ -66,7 +62,7 @@ For example:
 
 (4) Once the module successfully recognizes the command, it will broadcast **"learning succeed"**, confirming the modification. From now on, you can use **"go forward"** to perform the same action as the default **"go straight"** command.
 
-(5) To delete the "**go** **forward**" command, simply say "**DELETE-GO-STRAIGHT**." When the module responds with "**Speech length is not enough, please say it again**" the command will be removed. Note that this only deletes the "**go forward**" command.
+(5) To delete the **go forward** command, simply say **DELETE-GO-STRAIGHT**. Note that only the **go forward** command will be deleted, while **GO-STRAIGHT** will remain unchanged.
 
 > [!NOTE]
 >
