@@ -76,7 +76,15 @@ The WonderEcho website offers users a convenient way to customize the built-in w
 
 (3) Copy the file **\[0\]asr_english_CI1302_V00916.dat** from the **"GfstCmd"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing).
 
+> [!NOTE]
+>
+> Note: If the pasted file name starts with the prefix “[0]lm\*\*\*”, delete the corresponding files in the asr folder that start with “[0]asr\*\*\*”, and manually change the prefix of the pasted file to “[0]asr***”.
+
 (4) Copy the file **\[1\]asr_english_CI1302_V00916.dat** from the **"GfstWake"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) folder.
+
+> [!NOTE]
+>
+> Note: If the pasted file name starts with the prefix “[1]lm\*\*\*”, delete the files in the asr folder that start with “[1]asr\*\*\*”, and manually change the prefix of the pasted file to “[1]asr\*\*\*”.
 
 ### 5.1.4 Integrate Text To Speech
 
@@ -84,7 +92,13 @@ The WonderEcho website offers users a convenient way to customize the built-in w
 
 <img src="../_static/media/chapter_5/image16.png" class="common_img" />
 
-(2) Copy all audio files (`*.wav`) to the folder: [CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\voice\src](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing)
+(2) Copy all audio files with extension .wav under the **src** directory to the folder: 
+
+["CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\voice\src"](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing)
+
+> [!NOTE]
+>
+> Note: Delete all existing files in the target path before pasting the copied files.
 
 ### 5.1.5 Firmware Integration
 
