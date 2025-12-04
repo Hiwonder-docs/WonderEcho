@@ -2,6 +2,10 @@
 
 ## 5.1 Voice Chip Firmware Development
 
+> [!NOTE]
+>
+> This section explains the firmware creation and flashing process with a step-by-step guide, combining images and text. Please refer to the video tutorial for additional learning. Path: **[1. Tutorials \5. Firmware Development \5.1.4 Firmware Development & Flashing](https://drive.google.com/file/d/1IzFQOiKagOqLSWuHf-JVfskXkEiQ9jUV/view?usp=sharing)**.
+
 ### 5.1.1 WonderEcho Website Function
 
 The WonderEcho website offers users a convenient way to customize the built-in wake word and commands for the WonderEcho voice interaction module. The website features two main sections: Language Model Development and Text-to-Speech. Users can submit common phrases to generate files for both the Language Model and Text-to-Speech. Once the files are generated, they can be downloaded, integrated into a bin file, and flashed onto the WonderEcho module to enable voice interaction capabilities.
