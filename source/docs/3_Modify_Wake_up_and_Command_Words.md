@@ -21,11 +21,11 @@ Connect the module to the computer with a Type-C cable.
 
 (1) Wake up the module by saying **"HELLO-HI-WONDER"**. When the module responds with **"I'm here"**, it indicates that the module is in recognition mode.
 
-(2) Say the command "**LEARN-WAKE-UP-WORD**" to the voice interaction module. If the module responds with "**please say command**," it means the module has entered wake-up word learning mode.
+(2) Say the command "**STUDY-WAKE**" to the voice interaction module. If the module responds with "**please say command**," it means the module has entered wake-up word learning mode.
 
 (3) Say the desired wake-up word to the module. It is recommended to choose a short word. For example, set **"Hiwonder"** as the wake-up word.
 
-(4) Once the module successfully recognizes the word, it will respond and confirm that the wake-up word has been successfully modified. The custom wake word **Hiwonder** can be used to activate the module now.
+(4) Once the module successfully recognizes the word, it will announce “**learning succeed,**” confirming that the wake-up word has been successfully modified. You can now use **Hiwonder** to activate the module.
 
 > [!NOTE]
 >
@@ -56,7 +56,7 @@ For example:
 
 (1) Wake up the module by saying **"HELLO-HI-WONDER"**. When the module responds with **"I'm here"**, it indicates that the module is ready for recognition.
 
-(2) Say the command  "**LEARN-GO-STRAIGHT**" to the module. If it responds with **"Please say command"**, it means the module has entered command word learning mode.
+(2) Say the command  "**STUDY-GO-STRAIGHT**" to the module. If it responds with **"Please say command"**, it means the module has entered command word learning mode.
 
 (3) Say the desired command word to the module. It is recommended to choose a short and clear command. For example, set **"go forward"** as the new command word.
 
