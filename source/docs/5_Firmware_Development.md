@@ -1,143 +1,230 @@
 # 5. Firmware Development
 
-## 5.1 Voice Chip Firmware Development
+<p id ="p5-1"></p>
+
+## 5.1 WonderEcho Firmware Development
+
+This lesson covers the creation and flashing of firmware for the WonderEcho module.
+
+### 5.1.1 Notification
+
+The module comes pre-programmed with speech recognition firmware from the factory. This factory firmware file is available within the same directory as this document. Follow the provided instructions to rebuild the firmware if custom creation is necessary.
+
+###  5.1.2 Firmware Creation and Flashing
+
+1)  Navigate to the official firmware creation website at [https://aiplatform.chipintelli.com/home/index.html](https://aiplatform.chipintelli.com/home/index.html). The platform interface defaults to Chinese, so utilization of the browser translation feature is recommended to switch the language to English for easier navigation.
+
+2)  Access the ChipIntelli Voice AI Platform, click **Platform Features** in the top menu, and select **In-depth development of product Firmware & SDK** under the Product Development section.
+
+<img src="../_static/media/chapter_5/section_1/media/image1.png"  style="width:800px"   class="common_img" />
+
+3. A login prompt will appear. Since standard registration requires a specific regional mobile number, a shared account is provided for international developers:  
+
+   **Username: 18033085495  
+   Password: hiwonder**
+
+4. Upon successful login, click **Offline speech recognition large model application** to enter the development section.
+
+<img src="../_static/media/chapter_5/section_1/media/image2.png"  style="width:800px"   class="common_img" />
+
+5)  Click **Speech recognition firmware and SDK development** in the submenu to access the corresponding section.
+
+<img src="../_static/media/chapter_5/section_1/media/image3.png"  style="width:800px"   class="common_img" />
+
+6)  Click **New projects** in the left sidebar to initialize a new project.
+
+<img src="../_static/media/chapter_5/section_1/media/image4.png"  style="width:800px"   class="common_img" />
+
+7)  Input a customized Product Name and Description. For the remaining fields, apply the options indicated by the red box, specifically selecting **General** and then **Intelligent central control** for the Product Type. Click **Create** once these configurations are complete.
+
+<img src="../_static/media/chapter_5/section_1/media/image5.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image6.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image7.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image8.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image9.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image10.png"  style="width:800px"   class="common_img" />
+
+8)  Set the project language next. Select **English** under Language Type to configure English voice recognition. Click **Continue** to proceed after selecting the appropriate options.
+
+<img src="../_static/media/chapter_5/section_1/media/image11.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image12.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image13.png"  style="width:800px"   class="common_img" />
+
+9)  Important adjustments are required within the firmware configuration interface. Begin by enabling the **Echo Cancellation** feature under Algorithm Settings.
+
+<img src="../_static/media/chapter_5/section_1/media/image14.png"  style="width:800px"   class="common_img" />
+
+10) Set the oscillator source to **Internal RC** and disable the **Baud Rate Calibration** function under Hardware Settings.
+
+<img src="../_static/media/chapter_5/section_1/media/image15.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image16.png"  style="width:800px"   class="common_img" />
+
+<img src="../_static/media/chapter_5/section_1/media/image17.png"  style="width:800px"   class="common_img" />
+
+11) Configure **UART0** to **Open-Drain Mode** within the UART Print Settings, ensuring support for an external 5V pull-up.
+
+<img src="../_static/media/chapter_5/section_1/media/image18.png"  style="width:800px"   class="common_img" />
+
+12) For Communication UART Settings, set the Baud Rate to 115200 and configure UART1 to Open-Drain Mode, also supporting external 5V pull-up. After adjusting these settings, click **Continue** to move forward.
+
+<img src="../_static/media/chapter_5/section_1/media/image19.png"  style="width:800px"   class="common_img" />
+
+13) The subsequent step involves command word configuration. A voice output must be selected for the wake-up command. Select **Dane - English Male Voice** as the output voice for this example. The choice between Chinese and English voices depends entirely on the language settings configured previously.
+
+<img src="../_static/media/chapter_5/section_1/media/image20.png"  style="width:800px"   class="common_img" />
+
+14) Upload the command word attachment by locating the file named **Command Phrase and Playback Protocol List** and dragging it directly onto the webpage.
+
+<img src="../_static/media/chapter_5/section_1/media/image22.png"  style="width:800px"   class="common_img" />
+
+15) The command data populates the table below automatically after the file uploads.
 
 > [!NOTE]
 >
-> This section explains the firmware creation and flashing process with a step-by-step guide, combining images and text. Please refer to the video tutorial for additional learning. Path: **[1. Tutorials \5. Firmware Development \5.1.4 Firmware Development & Flashing](https://drive.google.com/file/d/1IzFQOiKagOqLSWuHf-JVfskXkEiQ9jUV/view?usp=sharing)**.
+> **The English firmware version exclusively supports English wake words, and mixed-language wake words are invalid. Furthermore, English wake words must be written in uppercase letters to ensure proper functionality.**
 
-### 5.1.1 WonderEcho Website Function
+<img src="../_static/media/chapter_5/section_1/media/image23.png"  style="width:800px"   class="common_img" />
 
-The WonderEcho website offers users a convenient way to customize the built-in wake word and commands for the WonderEcho voice interaction module. The website features two main sections: Language Model Development and Text-to-Speech. Users can submit common phrases to generate files for both the Language Model and Text-to-Speech. Once the files are generated, they can be downloaded, integrated into a bin file, and flashed onto the WonderEcho module to enable voice interaction capabilities.
+16. Enable **switching Self-learning** and select **Designated study**. The system automatically generates four self-learning commands, which require no changes during this step.
 
-### 5.1.2 Model Development
+<img src="../_static/media/chapter_5/section_1/media/image24.png"  style="width:800px"   class="common_img" />
 
-(1) Access the official firmware development platform: [https://www.wonderecho.net/](https://www.wonderecho.net)
+17. Click **Submit now** and allow a few minutes for the firmware generation process to complete. Click **Download** once finished to obtain the customized firmware.
 
-(2) Before creating the firmware, click **"Sign in"** at the top right corner to register an account and log in.
+<img src="../_static/media/chapter_5/section_1/media/image25.png"  style="width:800px"   class="common_img" />
 
-<img src="../_static/media/chapter_5/image2.png" class="common_img" />
+<img src="../_static/media/chapter_5/section_1/media/image26.png"  style="width:800px"   class="common_img" />
 
-(3) If already registered, log in and click **"Language Model Development"** to start creating the language model.
+18. Extract the downloaded archive. The resulting folder contains a .bin file, representing the custom firmware generated from the uploaded **Command Phrase and Playback Protocol List** file. Proceed to the **5.1.3 Firmware Flashing** section in this document to deploy the firmware to the module.
 
-<img src="../_static/media/chapter_5/image3.png" class="common_img" />
+<img src="../_static/media/chapter_5/section_1/media/image27.png"  style="width:800px"   class="common_img" />
 
-(4) Click **"New Program"** in the top left corner to create a new project.
+<img src="../_static/media/chapter_5/section_1/media/image28.png"  style="width:800px"   class="common_img" />
 
-<img src="../_static/media/chapter_5/image4.png" class="common_img" />
+###  5.1.3 Firmware Flashing
 
-(5) In the **"Program Name"** field, enter a project name of your choice. For example, we use **"WonderEcho"**.
+1)  Connect the voice interaction module to the computer using a Type-C data cable.
 
-<img src="../_static/media/chapter_5/image5.png" class="common_img" />
+<img src="../_static/media/chapter_5/section_1/media/image29.png"  style="width:800px"   class="common_img" />
 
-(6) To add command words, you have two options:
+2)  Launch [Firmware Development Tool\PACK_UPDATE_TOOL.exe](https://drive.google.com/drive/folders/1oxdaycGexBoikc8kI1Ha2SbNEz4KksHT?usp=sharing) located within the same directory as this document, choose the **CI1302** chip, and click **Update**.
 
-* **Edit directly on the panel:** Click **"Add Row"** to manually input command words. Ensure all words are in **uppercase** and separate multiple words with hyphens (**-**).
+<img src="../_static/media/chapter_5/section_1/media/image30.png"  style="width:800px"   class="common_img" />
 
-* **Upload a sample file:** Click **"Attachment Example"** to download a template. Edit the file in Excel according to the format, then upload it. The system will automatically process the data.
+3)  Click **Select firmware**, then locate the .bin firmware created in the previous steps. Here, the factory firmware **CI1302_English_SingleMic_V00729_UART1_115200_2M.bin** in the same directory as this document is used as an example.
 
-<img src="../_static/media/chapter_5/image6.png" class="common_img" />
+<img src="../_static/media/chapter_5/section_1/media/image31.png"  style="width:800px"   class="common_img" />
 
-(7) We opt for the first method—direct editing. Click **"Add Row"** to add a wake-up command. Ensure the command is written entirely in **uppercase**, and use hyphens (**-**) to separate multiple words. Finally, set the command type to **"wake-up"**.
+4)  Locate the appropriate serial port and select it.
 
-<img src="../_static/media/chapter_5/image7.png" class="common_img" />
+<img src="../_static/media/chapter_5/section_1/media/image32.png"  style="width:800px"   class="common_img" />
 
-(8) Similarly, add two more command words for recognition, setting their types to **"command"**. Once done, click **"Submit"** to complete the setup.
+5)  Press the **RST** button on the voice interaction module to enter flashing mode, then wait for the process to complete successfully.
 
-<img src="../_static/media/chapter_5/image8.png" class="common_img" />
+<img src="../_static/media/chapter_5/section_1/media/image33.png"  style="width:800px"   class="common_img" />
 
-(9) Wait for the platform to process the model. After processing, click **"Download"** on the right to save the model to your local device.
 
-<img src="../_static/media/chapter_5/image9.png" class="common_img" />
 
-(10) Next, click **"Text To Speech"** to create the broadcast voice prompts.
+## 5.2 Modifying Functional Phrase Entries
 
-<img src="../_static/media/chapter_5/image10.png" class="common_img" />
+The procedure for modifying functional phrase entries is outlined below.
 
-(11) Click **"New Program"** in the top left corner to create a new project for speech synthesis.
+1. Open the **Command Phrase and Playback Protocol List** spreadsheet located in the same directory as this document.
 
-<img src="../_static/media/chapter_5/image11.png" class="common_img" />
+2. Locate the functional phrase entries in the spreadsheet, which correspond to the first 10 items. These initial 10 functional phrases are fixed entries that do not support additions, meaning only modifications are permitted.
 
-(12) Choose a voice type for playback, such as **"Mia-English female voice"**, and set the volume to the default value of **15**.
+<img src="..\_static\media\chapter_5\section_2\media\image1.png"  style="width:800px"   class="common_img" />
 
-<img src="../_static/media/chapter_5/image12.png" class="common_img" />
+3. As an example, modify the wake word response phrase. Originally, the module plays back **I'm here** when **HELLO-HI-WONDER** is recognized. Change the playback phrase to **Hiwonder is here**.
 
-(13) Add three broadcast statements corresponding to the command words created in **"Language Model Development"**. In the **"Audio"** column, input the response for each command. For example, if the command **"HELLO-HI-WONDER"** is recognized, enter **"I am here"** as the response. Click **"Submit"** once completed.
+<img src="..\_static\media\chapter_5\section_2\media\image2.png"  style="width:800px"   class="common_img" />
 
-<img src="../_static/media/chapter_5/image13.png" class="common_img" />
+4. The wake word itself is also customizable. For example, set the wake word to **HELLO-ROBOT** and configure the module to play back **I'm here** upon activation.
 
-(14) Wait for the platform to process the text-to-speech data. After processing, click **"Download"** on the right to save the audio files to your local device.
+<img src="..\_static\media\chapter_5\section_2\media\image3.png"  style="width:800px"   class="common_img" />
 
-<img src="../_static/media/chapter_5/image14.png" class="common_img" />
+5. Save the spreadsheet after completing the modifications. Follow the steps detailed in [5.1 WonderEcho Firmware Development](#p5-1) to upload the spreadsheet to the website. If firmware was created previously, click **Inheritance** within the existing project to reuse the configuration and bypass parameter setup.
 
-### 5.1.3 Integrate Language Model
+<img src="..\_static\media\chapter_5\section_2\media\image4.png"  style="width:800px"   class="common_img" />
 
-(1) Extract the files starting with **"lm"** from the **"Language Model Development"** folder that you downloaded.
+6. Rebuild the firmware and flash it to the voice interaction module to apply the updated functional phrase entries.
 
-<img src="../_static/media/chapter_5/image15.png" class="common_img" />
 
-(2) Copy the **\[60000\]{cmd_info}.xlsx** file from the **"CmdWordStructure"** folder to the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\user_file\cmd_info](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) folder.
 
-(3) Copy the file **\[0\]asr_english_CI1302_V00916.dat** from the **"GfstCmd"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing).
+## 5.3 Adding New Command Words
 
-> [!NOTE]
->
-> Note: If the pasted file name starts with the prefix “[0]lm\*\*\*”, delete the corresponding files in the asr folder that start with “[0]asr\*\*\*”, and manually change the prefix of the pasted file to “[0]asr***”.
+The procedure for adding new command words is outlined below.
 
-(4) Copy the file **\[1\]asr_english_CI1302_V00916.dat** from the **"GfstWake"** folder and paste it into: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\asr](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) folder.
+1)  Open the **Command Phrase and Playback Protocol List** spreadsheet located in the same directory as this document.
 
-> [!NOTE]
->
-> Note: If the pasted file name starts with the prefix “[1]lm\*\*\*”, delete the files in the asr folder that start with “[1]asr\*\*\*”, and manually change the prefix of the pasted file to “[1]asr\*\*\*”.
+2)  Add a new command word at the bottom of the spreadsheet, such as **SHOW-RED-LIGHT**.
 
-### 5.1.4 Integrate Text To Speech
+<img src="../_static/media/chapter_5/section_3/media/image1.png" style="width:800px"   class="common_img" />
 
-(1) Extract the file starting with **"tts"** from the **"Text To Speech"** download.
+3. Set the function type to **Command Word** and the playback mode to **Auto**. This ensures that when **SHOW-RED-LIGHT** is recognized, the module will automatically play back **It's a red light now**. 
 
-<img src="../_static/media/chapter_5/image16.png" class="common_img" />
+   > [!NOTE]
+   >
+   > **In the spreadsheet, select “命令词” for command word type and “主” for auto mode.**
 
-(2) Copy all audio files with extension .wav under the **src** directory to the folder: 
+<img src="../_static/media/chapter_5/section_3/media/image2.png" style="width:800px"   class="common_img" />
 
-["CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\voice\src"](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing)
+4)  Review the sending protocol. The first and second bytes form the data frame header and require no modification. For command words, the third byte must be set to **00** to distinguish between a command word and a playback phrase.
 
-> [!NOTE]
->
-> Note: Delete all existing files in the target path before pasting the copied files.
+<img src="../_static/media/chapter_5/section_3/media/image3.png" style="width:800px"   class="common_img" />
 
-### 5.1.5 Firmware Integration
+5)  The fourth byte represents the command word ID in hexadecimal. If the previous command word ID was B4, this new command word should be assigned B5. In special cases, IDs can be duplicated when two command words need to produce the same result.
 
-Open the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware\Combine bin.bat](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) file and wait for the firmware integration to complete. The window will automatically close once the process is finished.
+<img src="../_static/media/chapter_5/section_3/media/image4.png" style="width:800px"   class="common_img" />
 
-<img src="../_static/media/chapter_5/image17.png" class="common_img" />
+6)  The fifth byte in the protocol is fixed at “FB” and does not require modification. Ensure that the sending and receiving protocols match in the spreadsheet.
 
-### 5.1.6 Firmware Flashing
+<img src="../_static/media/chapter_5/section_3/media/image5.png" style="width:800px"   class="common_img" />
 
-(1) Connect the voice interaction module to the PC using the Type-C data cable.
+7)  Save the spreadsheet after implementing these changes. Follow the steps in [5.1 WonderEcho Firmware Creation](#p5-1) to upload the spreadsheet to the platform. If firmware was generated previously, click **Inheritance** in the existing project to reuse the configuration and skip parameter setup.
 
-<img src="../_static/media/chapter_5/image18.png" class="common_img" />
+> <img src="../_static/media/chapter_5/section_3/media/image6.png" style="width:800px"   class="common_img" />
 
-(2) Open the **"Upgrade.bat"** file located in the [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing) folder, which can be found in the same directory as this document, and then click on **"Packaging"**.
+8)  Rebuild the firmware and flash it to the voice interaction module to deploy the new command word functionality.
 
-<img src="../_static/media/chapter_5/image19.png" class="common_img" />
+## 5.4 Adding New Playback Phrases
 
-(3) First, click the **"Auto-allocate"** button to automatically allocate resources. Then, click on **"Packaging"** to merge the firmware and wait for the process to complete.
+The procedure for adding new playback phrases is outlined below.
 
-<img src="../_static/media/chapter_5/image20.png" class="common_img" />
+1)  Open the **Command Word and Playback Protocol List** spreadsheet located in the same directory as this document.
 
-(4) Once the process is complete, the packaged firmware will be saved in the following path: [Firmware Development Tool\CI130X_SDK_Offline_uart_1_12_16\projects\cwsl_A_sample\firmware](https://drive.google.com/drive/folders/1efqsA95PbBs_dRr-BbNYG_BOKanbrx51?usp=sharing).
+2)  Add a new entry at the bottom of the spreadsheet, such as the playback phrase **It's a green light now**.
 
-<img src="../_static/media/chapter_5/image22.png" class="common_img" />
+<img src="../_static/media/chapter_5/section_4/media/image1.png"  style="width:800px"   class="common_img" />
 
-<img src="../_static/media/chapter_5/image23.png" class="common_img" />
+3. Set the function type to **Playback Phrase** and the playback mode to **Passive**.
 
-(5) Click on **"Select firmware"** and locate the firmware generated in step 4, then select it.
+   > [!NOTE]
+   >
+   > **Note that 播报语 must be selected for the playback phrase type and 被 for the passive mode within the spreadsheet.**
 
-<img src="../_static/media/chapter_5/image24.png" class="common_img" style="width:880px;"/>
+<img src="../_static/media/chapter_5/section_4/media/image2.png"  style="width:800px"   class="common_img" />
 
-(6) Locate the corresponding serial port and click on the right side to select it.
+4)  Review the sending protocol. The first and second bytes represent the data frame header and require no modification. For playback phrases, the third byte must be set to **FF** to classify the instruction specifically as a playback phrase.
 
-<img src="../_static/media/chapter_5/image25.png" class="common_img" style="width:900px;"/>
+<img src="../_static/media/chapter_5/section_4/media/image3.png"  style="width:800px"   class="common_img" />
 
-(7) Next, press the **"RST"** button on the voice interaction module to begin the flashing process. Wait for the flashing to complete successfully.
+5)  The fourth byte represents the command word or playback phrase ID in hexadecimal. If the previous playback phrase ID was **2E**, this new phrase must be assigned **2F**.
 
-<img src="../_static/media/chapter_5/image26.png" class="common_img" />
+6)  The fifth byte in the protocol is fixed at **FB** and requires no modification. Ensure the sending and receiving protocols match exactly within the spreadsheet.
+
+<img src="../_static/media/chapter_5/section_4/media/image4.png"  style="width:800px"   class="common_img" />
+
+7)  Save the spreadsheet after applying these changes. Follow the steps in [5.1 WonderEcho Firmware Creation](#p5-1) to upload the spreadsheet to the website. If firmware was developed previously, click **Inheritance** in the existing project to reuse the configuration and skip parameter setup.
+
+<img src="../_static/media/chapter_5/section_4/media/image5.png"  style="width:800px"   class="common_img" />
+
+8)  Rebuild the firmware and flash it to the voice interaction module to enable the new playback phrase functionality.
